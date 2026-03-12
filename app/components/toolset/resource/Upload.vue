@@ -124,7 +124,6 @@ const abortLargeUpload = async (upload: ToolsetLargeFileUploadResponse) => {
     await $fetch(`/api/toolset/${props.toolsetId}/upload/abort`, {
       method: 'POST',
       body: abortUploadData,
-      watch: false,
       ...kungalgameResponseHandler
     })
   } catch (abortError) {
@@ -170,6 +169,9 @@ const onChange = (e: Event) => {
   const targetFile = t.files && t.files[0] ? t.files[0] : null
   const res = checkFileValid(targetFile)
   if (!res) {
+    return
+  }
+  if (!targetFile) {
     return
   }
   setSelectedUploadFile(targetFile)
@@ -227,7 +229,6 @@ const uploadSmall = async (f: File) => {
     {
       method: 'POST',
       body: initUploadData,
-      watch: false,
       ...kungalgameResponseHandler
     }
   )
@@ -263,7 +264,6 @@ const uploadSmall = async (f: File) => {
       {
         method: 'POST',
         body: completeUploadData,
-        watch: false,
         ...kungalgameResponseHandler
       }
     )
@@ -304,7 +304,6 @@ const uploadLarge = async (f: File) => {
     {
       method: 'POST',
       body: initUploadData,
-      watch: false,
       ...kungalgameResponseHandler
     }
   )
@@ -362,7 +361,6 @@ const uploadLarge = async (f: File) => {
       {
         method: 'POST',
         body: completeUploadData,
-        watch: false,
         ...kungalgameResponseHandler
       }
     )
